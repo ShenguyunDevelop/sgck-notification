@@ -12,7 +12,6 @@ import com.alibaba.rocketmq.client.producer.SendResult;
 import com.alibaba.rocketmq.client.producer.SendStatus;
 import com.alibaba.rocketmq.common.message.Message;
 import com.alibaba.rocketmq.common.message.MessageQueue;
-import com.alibaba.rocketmq.tools.admin.DefaultMQAdminExt;
 import com.sgck.notification.NotificationProducer;
 
 public class SGProducer implements NotificationProducer{
@@ -27,7 +26,6 @@ public class SGProducer implements NotificationProducer{
      * Spring bean init-method
      */
     public void init() throws MQClientException {
-        // 锟斤拷始锟斤拷
         defaultMQProducer = new DefaultMQProducer(producerGroup);
         defaultMQProducer.setNamesrvAddr(namesrvAddr);
         defaultMQProducer.setInstanceName(String.valueOf(System.currentTimeMillis()));
@@ -73,7 +71,7 @@ public class SGProducer implements NotificationProducer{
             logger.error(e.getMessage() + String.valueOf(sendResult));
             return false;
         } 
-        // 锟斤拷锟斤拷息锟斤拷锟斤拷失锟斤拷时锟斤拷未锟斤拷锟�
+
         if (sendResult == null || sendResult.getSendStatus() != SendStatus.SEND_OK) {
         	logger.error("failed to send message,SendStatus is not OK");
         	return false;
